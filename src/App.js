@@ -1,13 +1,12 @@
-import logo from './logo.svg';
-import { HomePage } from './components';
-import './App.scss';
+import React, { HomePage } from './components'
+import './App.scss'
 
 function App() {
   return (
     <>
-    <HomePage />
+      <HomePage />
     </>
-  );
+  )
 }
 
-export default App;
+export default App
