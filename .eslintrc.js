@@ -18,11 +18,11 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
+    'indent': ['error', 2],
     'require-jsdoc': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
     'object-curly-spacing': [2, 'always'],
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
   },
-  indent: ['error', 2],
 };

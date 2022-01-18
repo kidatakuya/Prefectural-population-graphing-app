@@ -1,8 +1,7 @@
 function HomeMain() {
   return (
     <main>
-      <div></div>
-      <div></div>
+      <div>t</div>
     </main>
   );
 }
