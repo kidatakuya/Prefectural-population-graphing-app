@@ -4,7 +4,7 @@ function HomeMain() {
       <div></div>
       <div></div>
     </main>
-  )
+  );
 }
 
-export default HomeMain
+export default HomeMain;
