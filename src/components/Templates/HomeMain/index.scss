@@ -17,3 +17,16 @@
 // .highcharts-data-table tr:hover {
 //   background: #f1f7ff;
 // }
+.homeMain {
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    // justify-content: space-between;
+    li {
+      padding: 0 20px;
+      width: 100px;
+      // display: flex;
+      // justify-content: space-between;
+    }
+  }
+}
