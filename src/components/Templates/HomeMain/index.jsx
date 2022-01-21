@@ -1,6 +1,7 @@
 // import React, { useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import axios from 'axios';
 import './index.scss';
 function HomeMain() {
   const testList = ['奈良県', '大阪府', '京都府', '兵庫県'];
