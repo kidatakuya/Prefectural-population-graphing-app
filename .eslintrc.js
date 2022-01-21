@@ -24,7 +24,18 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
     'object-curly-spacing': [2, 'always'],
-    'space-before-function-paren': ["error", {"anonymous": "always", "named": "never", "asyncArrow": "always"}],
+    'destructuring': 'all',
+    'space-before-function-paren': ['error', {'anonymous': 'always', 'named': 'never', 'asyncArrow': 'always'}],
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'operator-linebreak': [
+      'error',
+      'after',
+      {
+        'overrides': {
+          '?': 'before',
+          ':': 'before'
+        }
+      }
+    ]
   },
 };

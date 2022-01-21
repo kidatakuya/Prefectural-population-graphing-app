@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import axios from 'axios';
+// import axios from 'axios';
+import {
+  prefecturalDataFunction,
+  populationDataFunction,
+} from '../../Functions/DataAcquisition.jsx';
 import './index.scss';
 
 function HomeMain() {
-  const testList = ['奈良県', '大阪府', '京都府', '兵庫県'];
-  const [prefecturesList, setPrefecturesList] = useState(testList);
-
   const options = {
     title: {
       text: '総人口推移',
@@ -46,7 +47,7 @@ function HomeMain() {
         data: [1, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2],
       },
       {
-        name: 'なら',
+        name: '奈良県',
         data: [3, 2, 1],
       },
     ],
@@ -68,36 +69,43 @@ function HomeMain() {
     },
   };
 
-  useEffect(() => {
-    axios
-      .get('https://opendata.resas-portal.go.jp/api/v1/prefectures', {
-        headers: {
-          'Content-Type': 'application/json',
-          'X-API-KEY': 'y1IYMTGMlLkDuvbhte0NUHJ8L5UQ0D1Rj7U3GXG3',
-        },
-      })
-      .then(function (response) {
-        console.log(response.data.result);
+  const apiKey = 'y1IYMTGMlLkDuvbhte0NUHJ8L5UQ0D1Rj7U3GXG3';
+  const prefecturalApi =
+    'https://opendata.resas-portal.go.jp/api/v1/prefectures';
+  const populationApi =
+    'https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?';
+  const [prefecturesList, setPrefecturesList] = useState([]);
+  const [populationData, setPopulationData] = useState(options);
+  const [flag, setFlag] = useState(false);
+  const test02 = (e) => {
+    console.log(e);
+  };
 
-        setPrefecturesList(response.data.result);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  useEffect(() => {
+    prefecturalDataFunction(apiKey, prefecturalApi, setPrefecturesList);
+    populationDataFunction(apiKey, populationApi);
   }, []);
+
+  useEffect(() => {
+    console.log(flag);
+  }, flag);
   return (
     <main className="homeMain">
       <ul>
         {prefecturesList
           ? prefecturesList.map((item, index) => (
               <li key={index}>
-                <input type="checkbox" value={item.prefCode} />
+                <input
+                  type="checkbox"
+                  value={item.prefCode}
+                  checked={() => test02(item.prefName)}
+                />
                 <label htmlFor="">{item.prefName}</label>
               </li>
             ))
           : ''}
       </ul>
-      <HighchartsReact highcharts={Highcharts} options={options} />
+      <HighchartsReact highcharts={Highcharts} options={populationData} />
     </main>
   );
 }
