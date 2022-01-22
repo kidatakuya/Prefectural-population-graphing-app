@@ -59,12 +59,6 @@ function HomeMain() {
       ],
     },
     series: populationData,
-    // series: [
-    //   {
-    //     name: '大阪',
-    //     data: [1, 2, 3, 4, 5, 7, 8],
-    //   },
-    // ],
     responsive: {
       rules: [
         {
@@ -93,8 +87,15 @@ function HomeMain() {
         data: [],
       });
     } else {
+      const checkedData = populationData.slice();
+      const newData = [];
+      checkedData.forEach((elements, key) => {
+        if (!(name == checkedData[key].name)) {
+          newData.push(checkedData[key]);
+        }
+        setPopulationData(newData);
+      });
     }
-    console.log(data[index].flag);
   };
 
   useEffect(() => {

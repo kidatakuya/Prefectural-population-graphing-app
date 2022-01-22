@@ -44,7 +44,6 @@ export const populationDataFunction = (apiKey, prefCode, datas, setData, a) => {
       const valueAll = datas.slice();
 
       valueAll.push(value);
-      console.log(valueAll);
       setData(valueAll);
     })
     .catch(function (error) {
