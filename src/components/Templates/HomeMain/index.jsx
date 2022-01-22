@@ -22,19 +22,28 @@ function HomeMain() {
       text: '総人口推移',
     },
     xAxis: {
+      title: {
+        text: '年度',
+      },
       categories: [
-        '1月',
-        '2月',
-        '3月',
-        '4月',
-        '5月',
-        '6月',
-        '7月',
-        '8月',
-        '9月',
-        '10月',
-        '11月',
-        '12月',
+        '1980',
+        '1985',
+        '1990',
+        '1995',
+        '2000',
+        '2005',
+        '2010',
+        '2015',
+        '2020',
+        '2025',
+        '2030',
+        '2035',
+        '2040',
+        '2045',
+        '2050',
+        '2055',
+        '2060',
+        '2065',
       ],
     },
     yAxis: {
@@ -50,6 +59,12 @@ function HomeMain() {
       ],
     },
     series: populationData,
+    // series: [
+    //   {
+    //     name: '大阪',
+    //     data: [1, 2, 3, 4, 5, 7, 8],
+    //   },
+    // ],
     responsive: {
       rules: [
         {
@@ -89,15 +104,15 @@ function HomeMain() {
 
   useEffect(() => {
     prefecturalDataFunction(apiKey, prefecturalApi, setPrefecturesList);
-    populationDataFunction(
-      apiKey,
-      populationApi,
-      1,
-      '北海道',
-      populationData,
-      setPopulationData,
-      { name: '北海道', data: [] },
-    );
+    // populationDataFunction(
+    //   apiKey,
+    //   populationApi,
+    //   1,
+    //   '北海道',
+    //   populationData,
+    //   setPopulationData,
+    //   { name: '北海道', data: [] },
+    // );
   }, []);
 
   return (
@@ -119,7 +134,7 @@ function HomeMain() {
           : ''}
       </ul>
       <div>
-        <HighchartsReact highcharts={Highcharts} options={populationData} />
+        <HighchartsReact highcharts={Highcharts} options={options} />
       </div>
     </main>
   );

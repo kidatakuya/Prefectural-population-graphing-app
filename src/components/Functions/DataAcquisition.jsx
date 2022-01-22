@@ -33,8 +33,7 @@ export const populationDataFunction = (
   a,
 ) => {
   // const api = `${apiUrl}prefCode=${prefCode}`;
-  const api =
-    'https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?prefCode=11';
+  const api = `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?prefCode=${prefCode}`;
   axios
     .get(api, {
       headers: {
@@ -52,11 +51,10 @@ export const populationDataFunction = (
         year.push(element.year);
         value.data.push(element.value);
       });
-      const valueAll = datas;
+      const valueAll = datas.slice();
 
       valueAll.push(value);
       console.log(valueAll);
-
       setData(valueAll);
     })
     .catch(function (error) {
