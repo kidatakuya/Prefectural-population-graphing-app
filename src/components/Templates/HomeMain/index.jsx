@@ -9,6 +9,14 @@ import {
 import './index.scss';
 
 function HomeMain() {
+  const apiKey = 'y1IYMTGMlLkDuvbhte0NUHJ8L5UQ0D1Rj7U3GXG3';
+  const prefecturalApi =
+    'https://opendata.resas-portal.go.jp/api/v1/prefectures';
+  const populationApi =
+    'https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?';
+  const [prefecturesList, setPrefecturesList] = useState([]);
+  const [populationData, setPopulationData] = useState([]);
+
   const options = {
     title: {
       text: '総人口推移',
@@ -41,16 +49,7 @@ function HomeMain() {
         },
       ],
     },
-    series: [
-      {
-        name: '大阪',
-        data: [1, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2],
-      },
-      {
-        name: '奈良県',
-        data: [3, 2, 1],
-      },
-    ],
+    series: populationData,
     responsive: {
       rules: [
         {
@@ -69,26 +68,38 @@ function HomeMain() {
     },
   };
 
-  const apiKey = 'y1IYMTGMlLkDuvbhte0NUHJ8L5UQ0D1Rj7U3GXG3';
-  const prefecturalApi =
-    'https://opendata.resas-portal.go.jp/api/v1/prefectures';
-  const populationApi =
-    'https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?';
-  const [prefecturesList, setPrefecturesList] = useState([]);
-  const [populationData, setPopulationData] = useState(options);
-  const [flag, setFlag] = useState(false);
-  const test02 = (e) => {
-    console.log(e);
+  const test02 = (index, dataList, code, name) => {
+    const data = dataList;
+
+    data[index].flag = !data[index].flag;
+    setPrefecturesList(data);
+    if (data[index].flag) {
+      populationDataFunction(
+        apiKey,
+        populationApi,
+        code,
+        name,
+        populationData,
+        setPopulationData,
+        { name: name, data: [] },
+      );
+    }
+    console.log(data[index].flag);
   };
 
   useEffect(() => {
     prefecturalDataFunction(apiKey, prefecturalApi, setPrefecturesList);
-    populationDataFunction(apiKey, populationApi);
+    populationDataFunction(
+      apiKey,
+      populationApi,
+      1,
+      '北海道',
+      populationData,
+      setPopulationData,
+      { name: '北海道', data: [] },
+    );
   }, []);
 
-  useEffect(() => {
-    console.log(flag);
-  }, flag);
   return (
     <main className="homeMain">
       <ul>
@@ -98,14 +109,18 @@ function HomeMain() {
                 <input
                   type="checkbox"
                   value={item.prefCode}
-                  checked={() => test02(item.prefName)}
+                  onChange={() =>
+                    test02(index, prefecturesList, item.prefCode, item.prefName)
+                  }
                 />
                 <label htmlFor="">{item.prefName}</label>
               </li>
             ))
           : ''}
       </ul>
-      <HighchartsReact highcharts={Highcharts} options={populationData} />
+      <div>
+        <HighchartsReact highcharts={Highcharts} options={populationData} />
+      </div>
     </main>
   );
 }

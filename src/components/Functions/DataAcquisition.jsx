@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // 都道府県データ取得
-export const prefecturalDataFunction = (apiKey, apiUrl, setPrefecturesList) => {
+export const prefecturalDataFunction = (apiKey, apiUrl, setData) => {
   axios
     .get(apiUrl, {
       headers: {
@@ -10,7 +10,12 @@ export const prefecturalDataFunction = (apiKey, apiUrl, setPrefecturesList) => {
       },
     })
     .then(function (response) {
-      setPrefecturesList(response.data.result);
+      const data = response.data.result;
+      data.forEach((elements, key) => {
+        data[key].flag = false;
+      });
+
+      setData(data);
     })
     .catch(function (error) {
       console.log(error);
@@ -18,28 +23,41 @@ export const prefecturalDataFunction = (apiKey, apiUrl, setPrefecturesList) => {
 };
 
 // 人口データ取得
-export const populationDataFunction = (apiKey, apiUrl) => {
+export const populationDataFunction = (
+  apiKey,
+  apiUrl,
+  prefCode,
+  prefName,
+  datas,
+  setData,
+  a,
+) => {
+  // const api = `${apiUrl}prefCode=${prefCode}`;
+  const api =
+    'https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?prefCode=11';
   axios
-    .get(
-      'https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?prefCode=11',
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'X-API-KEY': apiKey,
-        },
+    .get(api, {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-API-KEY': apiKey,
       },
-    )
+    })
     .then(function (response) {
+      console.log(a);
+      const value = a;
       const year = [];
-      const value = [];
       const test01 = response.data.result.data[0].data;
       test01.forEach((element) => {
-        console.log(element);
+        // console.log(element);
         year.push(element.year);
-        value.push(element.year);
+        value.data.push(element.value);
       });
-      console.log(year);
-      console.log(value);
+      const valueAll = datas;
+
+      valueAll.push(value);
+      console.log(valueAll);
+
+      setData(valueAll);
     })
     .catch(function (error) {
       console.log(error);
