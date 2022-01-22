@@ -23,16 +23,7 @@ export const prefecturalDataFunction = (apiKey, apiUrl, setData) => {
 };
 
 // 人口データ取得
-export const populationDataFunction = (
-  apiKey,
-  apiUrl,
-  prefCode,
-  prefName,
-  datas,
-  setData,
-  a,
-) => {
-  // const api = `${apiUrl}prefCode=${prefCode}`;
+export const populationDataFunction = (apiKey, prefCode, datas, setData, a) => {
   const api = `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?prefCode=${prefCode}`;
   axios
     .get(api, {
@@ -45,9 +36,8 @@ export const populationDataFunction = (
       console.log(a);
       const value = a;
       const year = [];
-      const test01 = response.data.result.data[0].data;
-      test01.forEach((element) => {
-        // console.log(element);
+      const responseData = response.data.result.data[0].data;
+      responseData.forEach((element) => {
         year.push(element.year);
         value.data.push(element.value);
       });

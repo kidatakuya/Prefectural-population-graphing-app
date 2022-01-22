@@ -83,36 +83,22 @@ function HomeMain() {
     },
   };
 
-  const test02 = (index, dataList, code, name) => {
+  const checkFunction = (index, dataList, code, name) => {
     const data = dataList;
-
     data[index].flag = !data[index].flag;
     setPrefecturesList(data);
     if (data[index].flag) {
-      populationDataFunction(
-        apiKey,
-        populationApi,
-        code,
-        name,
-        populationData,
-        setPopulationData,
-        { name: name, data: [] },
-      );
+      populationDataFunction(apiKey, code, populationData, setPopulationData, {
+        name: name,
+        data: [],
+      });
+    } else {
     }
     console.log(data[index].flag);
   };
 
   useEffect(() => {
     prefecturalDataFunction(apiKey, prefecturalApi, setPrefecturesList);
-    // populationDataFunction(
-    //   apiKey,
-    //   populationApi,
-    //   1,
-    //   '北海道',
-    //   populationData,
-    //   setPopulationData,
-    //   { name: '北海道', data: [] },
-    // );
   }, []);
 
   return (
@@ -125,7 +111,12 @@ function HomeMain() {
                   type="checkbox"
                   value={item.prefCode}
                   onChange={() =>
-                    test02(index, prefecturesList, item.prefCode, item.prefName)
+                    checkFunction(
+                      index,
+                      prefecturesList,
+                      item.prefCode,
+                      item.prefName,
+                    )
                   }
                 />
                 <label htmlFor="">{item.prefName}</label>
