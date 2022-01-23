@@ -1,14 +1,35 @@
 .homeMain {
-  padding: 40px 0;
-
+  padding: 1.6rem 0;
+  color: rgb(27, 27, 27);
   ul {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-
     li {
-      padding: 8px 16px;
-      width: 110px;
+      display: flex;
+      align-items: center;
+      font-size: 1.4rem;
+      padding: 0.8rem;
+      width: 9rem;
+    }
+  }
+}
+
+@media screen and (min-width: 600px) {
+  /*　画面サイズが768pxから1024pxまではここを読み込む　*/
+  .homeMain {
+    padding: 3.2rem 0;
+
+    ul {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      li {
+        padding: 0.8rem 1.6rem;
+        width: 11rem;
+        font-size: 1.6rem;
+      }
     }
   }
 }
