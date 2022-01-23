@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-// import axios from 'axios';
 import {
   prefecturalDataFunction,
   populationDataFunction,
@@ -12,8 +11,6 @@ function HomeMain() {
   const apiKey = 'y1IYMTGMlLkDuvbhte0NUHJ8L5UQ0D1Rj7U3GXG3';
   const prefecturalApi =
     'https://opendata.resas-portal.go.jp/api/v1/prefectures';
-  const populationApi =
-    'https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?';
   const [prefecturesList, setPrefecturesList] = useState([]);
   const [populationData, setPopulationData] = useState([]);
 

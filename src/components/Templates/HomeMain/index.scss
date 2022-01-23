@@ -1,32 +1,14 @@
-// .highcharts-data-table th {
-//   font-weight: 600;
-//   padding: 0.5em;
-// }
-
-// .highcharts-data-table td,
-// .highcharts-data-table th,
-// .highcharts-data-table caption {
-//   padding: 0.5em;
-// }
-
-// .highcharts-data-table thead tr,
-// .highcharts-data-table tr:nth-child(even) {
-//   background: #f8f8f8;
-// }
-
-// .highcharts-data-table tr:hover {
-//   background: #f1f7ff;
-// }
 .homeMain {
+  padding: 40px 0;
+
   ul {
     display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
-    // justify-content: space-between;
+
     li {
-      padding: 0 20px;
-      width: 100px;
-      // display: flex;
-      // justify-content: space-between;
+      padding: 8px 16px;
+      width: 110px;
     }
   }
 }

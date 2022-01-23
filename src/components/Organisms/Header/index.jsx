@@ -1,4 +1,5 @@
 import { Title } from '../../index';
+import './index.scss';
 
 function Header(props) {
   return (
