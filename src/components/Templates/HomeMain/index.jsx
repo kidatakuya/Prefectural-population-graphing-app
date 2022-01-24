@@ -13,6 +13,7 @@ function HomeMain() {
     'https://opendata.resas-portal.go.jp/api/v1/prefectures';
   const [prefecturesList, setPrefecturesList] = useState([]);
   const [populationData, setPopulationData] = useState([]);
+  const [yearData, setYearData] = useState([]);
 
   const options = {
     title: {
@@ -22,26 +23,7 @@ function HomeMain() {
       title: {
         text: '年度',
       },
-      categories: [
-        '1980',
-        '1985',
-        '1990',
-        '1995',
-        '2000',
-        '2005',
-        '2010',
-        '2015',
-        '2020',
-        '2025',
-        '2030',
-        '2035',
-        '2040',
-        '2045',
-        '2050',
-        '2055',
-        '2060',
-        '2065',
-      ],
+      categories: yearData,
     },
     yAxis: {
       title: {
@@ -79,15 +61,22 @@ function HomeMain() {
     data[index].flag = !data[index].flag;
     setPrefecturesList(data);
     if (data[index].flag) {
-      populationDataFunction(apiKey, code, populationData, setPopulationData, {
-        name: name,
-        data: [],
-      });
+      populationDataFunction(
+        apiKey,
+        code,
+        populationData,
+        setPopulationData,
+        {
+          name: name,
+          data: [],
+        },
+        setYearData,
+      );
     } else {
       const checkedData = populationData.slice();
       const newData = [];
       checkedData.forEach((elements, key) => {
-        if (!(name == checkedData[key].name)) {
+        if (!(name === checkedData[key].name)) {
           newData.push(checkedData[key]);
         }
         setPopulationData(newData);

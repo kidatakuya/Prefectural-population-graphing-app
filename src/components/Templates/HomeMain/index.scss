@@ -3,14 +3,21 @@
   color: rgb(27, 27, 27);
   ul {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
     li {
       display: flex;
       align-items: center;
       font-size: 1.4rem;
       padding: 0.8rem;
-      width: 9rem;
+      max-width: 20%;
+      min-width: 9rem;
+    }
+    &::after {
+      content: '';
+      display: inline-block;
+      max-width: 20%;
+      min-width: 9rem;
     }
   }
 }

@@ -1,0 +1,10 @@
+{
+  "trailingComma": "all",
+  "prettier.tabWidth": 2,
+  "semi": true,
+  "singleQuote": true,
+  "eslint.autoFixOnSave": true,
+  "prettier.eslintIntegration": true,
+  "prettier.tslintIntegration": true,
+  "printWidth": 80
+}
