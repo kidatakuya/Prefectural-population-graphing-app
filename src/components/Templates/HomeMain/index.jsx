@@ -90,6 +90,7 @@ function HomeMain() {
 
   return (
     <main className="homeMain">
+      <h2>都道府県</h2>
       <ul>
         {prefecturesList
           ? prefecturesList.map((item, index) => (

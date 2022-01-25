@@ -48,11 +48,11 @@ export const populationDataFunction = (
           element.year >= 1980 &&
           element.year <= 2020 &&
           element.year % 2 === 0 &&
-          window.innerWidth <= 600
+          window.innerWidth < 600
         ) {
           year.push(element.year);
           value.data.push(element.value);
-        } else if (window.innerWidth > 600) {
+        } else if (window.innerWidth >= 600) {
           year.push(element.year);
           value.data.push(element.value);
         }
