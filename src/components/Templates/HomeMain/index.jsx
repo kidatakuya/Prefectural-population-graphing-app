@@ -9,12 +9,12 @@ import './index.scss';
 
 function HomeMain() {
   const apiKey = 'y1IYMTGMlLkDuvbhte0NUHJ8L5UQ0D1Rj7U3GXG3';
-  const prefecturalApi =
-    'https://opendata.resas-portal.go.jp/api/v1/prefectures';
   const [prefecturesList, setPrefecturesList] = useState([]);
   const [populationData, setPopulationData] = useState([]);
   const [yearData, setYearData] = useState([]);
+  const [hitsFlag, setHitsFlag] = useState(true);
 
+  // グラフに渡す値
   const options = {
     title: {
       text: '総人口推移',
@@ -56,36 +56,47 @@ function HomeMain() {
     },
   };
 
-  const checkFunction = (index, dataList, code, name) => {
-    const data = dataList;
-    data[index].flag = !data[index].flag;
-    setPrefecturesList(data);
-    if (data[index].flag) {
-      populationDataFunction(
-        apiKey,
-        code,
-        populationData,
-        setPopulationData,
-        {
-          name: name,
-          data: [],
-        },
-        setYearData,
-      );
-    } else {
-      const checkedData = populationData.slice();
-      const newData = [];
-      checkedData.forEach((elements, key) => {
-        if (!(name === checkedData[key].name)) {
-          newData.push(checkedData[key]);
-        }
-        setPopulationData(newData);
-      });
+  const checkFunction = (index, dataList, code, name, elements) => {
+    // 連打防止flag
+    if (hitsFlag) {
+      setHitsFlag(false);
+      const data = dataList;
+      data[index].flag = !data[index].flag;
+      setPrefecturesList(data);
+      // クリック時処理
+      if (data[index].flag) {
+        // 人口データ取得関数
+        populationDataFunction(
+          apiKey,
+          code,
+          populationData,
+          setPopulationData,
+          {
+            name: name,
+            data: [],
+          },
+          setYearData,
+          setHitsFlag,
+        );
+        elements.currentTarget.classList.add('checkedItem');
+      } else {
+        const checkedData = populationData.slice();
+        const newData = [];
+        checkedData.forEach((elements, key) => {
+          if (!(name === checkedData[key].name)) {
+            newData.push(checkedData[key]);
+          }
+          setPopulationData(newData);
+        });
+        elements.currentTarget.classList.remove('checkedItem');
+        setHitsFlag(true);
+      }
     }
   };
 
   useEffect(() => {
-    prefecturalDataFunction(apiKey, prefecturalApi, setPrefecturesList);
+    // 都道府県表示
+    prefecturalDataFunction(apiKey, setPrefecturesList);
   }, []);
 
   return (
@@ -94,19 +105,18 @@ function HomeMain() {
       <ul>
         {prefecturesList
           ? prefecturesList.map((item, index) => (
-              <li key={index}>
-                <input
-                  type="checkbox"
-                  value={item.prefCode}
-                  onChange={() =>
-                    checkFunction(
-                      index,
-                      prefecturesList,
-                      item.prefCode,
-                      item.prefName,
-                    )
-                  }
-                />
+              <li
+                key={index}
+                onClick={(e) =>
+                  checkFunction(
+                    index,
+                    prefecturesList,
+                    item.prefCode,
+                    item.prefName,
+                    e,
+                  )
+                }
+              >
                 <label htmlFor="">{item.prefName}</label>
               </li>
             ))

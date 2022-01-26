@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-// 都道府県データ取得
-export const prefecturalDataFunction = (apiKey, apiUrl, setData) => {
+// 都道府県データ取得。引数(apiKey,都道府県表示用関数)
+export const prefecturalDataFunction = (apiKey, setData) => {
+  const apiUrl = 'https://opendata.resas-portal.go.jp/api/v1/prefectures';
   axios
     .get(apiUrl, {
       headers: {
@@ -22,7 +23,7 @@ export const prefecturalDataFunction = (apiKey, apiUrl, setData) => {
     });
 };
 
-// 人口データ取得
+// 人口データ取得。引数（apiKey, 都道府県コード,現在表示データ,表示人口更新関数,更新用雛形,表示年度更新関数,連打防止Flag関数）
 export const populationDataFunction = (
   apiKey,
   prefCode,
@@ -30,10 +31,11 @@ export const populationDataFunction = (
   setValueData,
   valueCurrentData,
   setYear,
+  setHitsFlag,
 ) => {
-  const api = `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?prefCode=${prefCode}`;
+  const apiUrl = `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?prefCode=${prefCode}`;
   axios
-    .get(api, {
+    .get(apiUrl, {
       headers: {
         'Content-Type': 'application/json',
         'X-API-KEY': apiKey,
@@ -60,8 +62,8 @@ export const populationDataFunction = (
       const valueAll = datas.slice();
       valueAll.push(value);
       setValueData(valueAll);
-      console.log(year);
       setYear(year);
+      setHitsFlag(true);
     })
     .catch(function (error) {
       console.log(error);
