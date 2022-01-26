@@ -38,10 +38,17 @@
       font-weight: bold;
     }
   }
+  .highcharts-background {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 600px) {
   .homeMain {
+    h2 {
+      padding: 0 0.8rem;
+      font-size: 1.8rem;
+    }
     ul {
       li {
         width: 20%;
