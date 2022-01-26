@@ -56,6 +56,7 @@ function HomeMain() {
     },
   };
 
+  // クリック時イベント
   const checkFunction = (index, dataList, code, name, elements) => {
     // 連打防止flag
     if (hitsFlag) {
@@ -106,6 +107,7 @@ function HomeMain() {
         {prefecturesList
           ? prefecturesList.map((item, index) => (
               <li
+                className={''}
                 key={index}
                 onClick={(e) =>
                   checkFunction(
