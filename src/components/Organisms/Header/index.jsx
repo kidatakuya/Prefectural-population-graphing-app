@@ -1,10 +1,11 @@
-import { Title } from '../../index';
+// import { Title } from '../../index';
+import React from 'react';
 import './index.scss';
 
-function Header(props) {
+function Header({ children }) {
   return (
     <header>
-      <Title isTitle={props.isTitle} />
+      {children}
     </header>
   );
 }
