@@ -79,7 +79,6 @@ function HomeMain() {
           setYearData,
           setHitsFlag,
         );
-        elements.currentTarget.classList.add('checkedItem');
       } else {
         const checkedData = populationData.slice();
         const newData = [];
@@ -89,7 +88,6 @@ function HomeMain() {
           }
           setPopulationData(newData);
         });
-        elements.currentTarget.classList.remove('checkedItem');
         setHitsFlag(true);
       }
     }
@@ -107,7 +105,7 @@ function HomeMain() {
         {prefecturesList
           ? prefecturesList.map((item, index) => (
               <li
-                className={''}
+                className={item.flag ? 'checkedItem' : ''}
                 key={index}
                 onClick={(e) =>
                   checkFunction(
