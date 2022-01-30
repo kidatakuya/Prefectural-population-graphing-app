@@ -1,10 +1,10 @@
-import { Header, HomeMain } from '../index';
+import { Header, HomeMain, Title } from '../index';
 
 function HomePage() {
   return (
     <>
-      <Header title={'都道府県別総人口推移グラフ'} >
-        <h1>都道府県別総人口推移グラフ</h1>
+      <Header >
+        <Title title={'都道府県別総人口推移グラフ'}/>
       </Header>
       <HomeMain />
     </>
